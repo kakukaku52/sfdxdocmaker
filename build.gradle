@@ -1,0 +1,35 @@
+// Apply the groovy plugin to add support for Groovy
+apply plugin: 'groovy'
+apply plugin: 'application'
+
+// In this section you declare where to find the dependencies of your project
+repositories {
+    jcenter()
+}
+
+// In this section you declare the dependencies for your production and test code
+dependencies {
+    compile 'org.codehaus.groovy:groovy-all:2.4.7'
+    compile 'org.codehaus.groovy.modules.http-builder:http-builder:0.7.1'
+
+    compile 'org.apache.poi:poi:3.14'
+    compile 'org.apache.poi:poi-ooxml:3.14'
+    
+    compile 'org.yaml:snakeyaml:1.17'
+
+    testCompile 'org.spockframework:spock-core:1.0-groovy-2.4'
+    testCompile 'junit:junit:4.12'
+}
+
+
+// gradle runでExcel作成するために、Main
+mainClassName = 'jp.nyasba.tool.docforce2.controller.SfdcGenerateExcelController'
+
+run {
+    if (project.hasProperty('conffile')) {
+        args = [ project.conffile ]
+    }
+    else {
+        args = [ "docforce.yml" ]
+    }
+}
