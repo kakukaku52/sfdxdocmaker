@@ -12,6 +12,18 @@ import org.yaml.snakeyaml.Yaml
 class SfdcGenerateExcelController {
     
     static void main(String[] args){
+
+//        String inputpath = "C:\\Users\\guohe\\Documents\\Project\\sfdx_guoh\\sfdx_guoh\\force-app\\main\\default\\objects\\"
+//        File newDirectoryStructureParent = new File(inputpath)
+//        newDirectoryStructureParent.listFiles().collect{
+//            it.listFiles().collect{
+//                if(!it.isFile()){
+//                    System.out.println(it);
+//                }else{
+//
+//                }
+//            }
+//        }
         
         //assert args.size() == 1 : "wrong argument: conf_file "
 
@@ -21,7 +33,9 @@ class SfdcGenerateExcelController {
         String inputBaseDir = getInputBaseDir(yaml)
         String outputDir = getOutputDir(yaml)
     
-        yaml.resources.collect{ createResouceDocument(inputBaseDir, outputDir, it) }
+        yaml.resources.collect{
+            createResouceDocument(inputBaseDir, outputDir, it)
+        }
     }
     
     private static def readConfigYaml(String yamlPath){
